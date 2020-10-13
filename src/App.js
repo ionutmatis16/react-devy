@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/person';
+import UserOutput from "./UserOutput/userOutput";
+import UserInput from "./UserInput/userInput";
 
 class App extends Component {
 
@@ -12,7 +14,12 @@ class App extends Component {
             {name: "Andrei", age: '25'},
             {name: "Ionut", age: '23'},
         ],
-        applicationTitle: 'My application'
+        applicationTitle: 'My application',
+        texts: [
+            {firstParagraph: 'da', secondParagraph: 'dada'},
+            {firstParagraph: 'nu', secondParagraph: 'nunu'},
+            {firstParagraph: 'ce', secondParagraph: 'cece'}
+        ]
     }
 
     switchNamesHandler = (name) => {
@@ -34,10 +41,34 @@ class App extends Component {
         });
     };
 
+    changeParagraphHandler = (value) => {
+        let texts = [...this.state.texts];
+        texts[0].firstParagraph = value;
+
+        this.setState({texts});
+    };
+
+    paragraphChangedHandler = (event) => {
+        let texts = [...this.state.texts];
+        texts[0].firstParagraph = event.target.value;
+
+        this.setState({texts});
+    }
+
     render() {
         return (
             <div>
                 <div className="App">
+                    <UserInput paragraphChangedEvent={this.paragraphChangedHandler}
+                               value={this.state.texts[0].firstParagraph}/>
+                    <UserOutput text={this.state.texts[0]}/>
+                    <br/>
+                    <UserOutput text={this.state.texts[1]}/>
+                    <br/>
+                    <UserOutput text={this.state.texts[2]}/>
+                    <button onClick={this.changeParagraphHandler.bind(this, "Changed")}>Change first paragraph</button>
+
+                    <div style={{marginBottom: 200}}/>
                     {/*<h1>Hello, I'm a React app</h1>*/}
                     <p>{this.state.applicationTitle}</p>
                     <Person name={this.state.persons[0].name}
