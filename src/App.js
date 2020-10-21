@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from './Person/person';
-import UserOutput from "./UserOutput/userOutput";
-import UserInput from "./UserInput/userInput";
+import Person from './Person/Person';
+import UserOutput from "./UserOutput/UserOutput";
+import UserInput from "./UserInput/UserInput";
 
 class App extends Component {
 

@@ -10,7 +10,7 @@ var Person = function () {
 
 import React from 'react';
 
-const Person = (props) => {
+const person = (props) => {
     return (
         // <p>I'm a person and my age is {Math.floor(Math.random() * 30)}!</p>
         <div className="myBorder">
@@ -21,4 +21,4 @@ const Person = (props) => {
     );
 };
 
-export default Person;
+export default person;

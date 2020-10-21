@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserInput = (props) => {
+const userInput = (props) => {
     return (
         <div>
             <input type="text" onChange={props.paragraphChangedEvent} value={props.value}/>
@@ -8,4 +8,4 @@ const UserInput = (props) => {
     )
 };
 
-export default UserInput;
+export default userInput;

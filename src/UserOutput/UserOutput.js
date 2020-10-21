@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserOutput = (props) => {
+const userOutput = (props) => {
     return (
         <div>
             <p>First paragraph: {props.text.firstParagraph}</p>
@@ -9,4 +9,4 @@ const UserOutput = (props) => {
     )
 };
 
-export default UserOutput;
+export default userOutput;
