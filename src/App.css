@@ -6,3 +6,24 @@
   border: 1px solid black;
   margin: 10px
 }
+
+.charClass {
+  padding: 16px;
+  text-align: center;
+  margin: 16px;
+  border: 1px solid black;
+}
+
+.charClass:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.margin-bottom-50 {
+  margin-bottom: 50px;
+}

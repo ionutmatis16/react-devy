@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import UserOutput from "./UserOutput/UserOutput";
-import UserInput from "./UserInput/UserInput";
+import CountComponent from "./SecondBigHomework/CountComponent";
+import ValidationComponent from "./SecondBigHomework/ValidationComponent";
+import CharComponent from "./SecondBigHomework/CharComponent";
 
 class App extends Component {
 
@@ -15,12 +16,17 @@ class App extends Component {
             {id: '4', name: "Ionut", age: '23'},
         ],
         applicationTitle: 'My application',
+        showPersons: true,
+
+        // first homework
         texts: [
             {firstParagraph: 'da', secondParagraph: 'dada'},
             {firstParagraph: 'nu', secondParagraph: 'nunu'},
             {firstParagraph: 'ce', secondParagraph: 'cece'}
         ],
-        showPersons: true
+        // second homework
+        inputToCount: '',
+        inputToCountTouched: false
     }
 
     switchNamesHandler = (name) => {
@@ -72,6 +78,21 @@ class App extends Component {
         this.setState({persons});
     }
 
+    onInputToCountChangeHandler = (event) => {
+        this.setState({
+            inputToCount: event.target.value,
+            inputToCountTouched: true
+        });
+    }
+
+    onCharClickHandler = (index) => {
+        let input = [...this.state.inputToCount];
+        input.splice(index, 1);
+        this.setState({
+            inputToCount: input.join('')
+        });
+    }
+
     render() {
         let persons = null;
         if (this.state.showPersons) {
@@ -100,7 +121,7 @@ class App extends Component {
         return (
             <div>
                 <div className="App">
-                    <UserInput paragraphChangedEvent={this.paragraphChangedHandler}
+                    {/*<UserInput paragraphChangedEvent={this.paragraphChangedHandler}
                                value={this.state.texts[0].firstParagraph}/>
                     <UserOutput text={this.state.texts[0]}/>
                     <br/>
@@ -109,9 +130,23 @@ class App extends Component {
                     <UserOutput text={this.state.texts[2]}/>
                     <button onClick={this.changeParagraphHandler.bind(this, "Changed")}>Change first paragraph</button>
 
-                    <div style={{marginBottom: 200}}/>
+                    <div style={{marginBottom: 200}}/>*/}
                     {/*<h1>Hello, I'm a React app</h1>*/}
-                    <p>{this.state.applicationTitle}</p>
+
+                    <h1>Big second homework</h1>
+                    <CountComponent onCountInputChangeHandler={this.onInputToCountChangeHandler}
+                                    value={this.state.inputToCount}/>
+                    <ValidationComponent inputTextLength={this.state.inputToCount.length}
+                                         inputTouched={this.state.inputToCountTouched}/>
+                    {
+                        this.state.inputToCount.split('').map((inputChar, index) =>
+                            <span key={index}>
+                                <CharComponent character={inputChar} onCharClick={this.onCharClickHandler.bind(this, index)}/>
+                            </span>
+                        )
+                    }
+
+                    <p style={{marginTop: 200}}>{this.state.applicationTitle}</p>
 
                     {
                         persons
