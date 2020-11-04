@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import './App.css';
-import Person from './Person/Person';
+import classes from './App.module.css';
+import Persons from './components/Persons/Persons';
 import CountComponent from "./SecondBigHomework/CountComponent";
 import ValidationComponent from "./SecondBigHomework/ValidationComponent";
 import CharComponent from "./SecondBigHomework/CharComponent";
+import Radium from 'radium';
+import Cockpit from "./components/Cockpit/Cockpit";
 
 class App extends Component {
 
@@ -96,31 +98,15 @@ class App extends Component {
     render() {
         let persons = null;
         if (this.state.showPersons) {
-            persons = (
-                <div>
-                    {
-                        this.state.persons.map(person =>
-                            <div key={person.id}>
-                                <Person name={person.name}
-                                        age={person.age}
-                                        clickEvent={this.deletePersonHandler.bind(this, person.id)}
-                                        nameChangeEvent={this.nameChangedHandler.bind(this, person.id)}>
-                                </Person>
-                            </div>
-                        )
-                    }
-
-                    {/*<button onClick={() => this.switchNamesHandler("devy")}>Switch names</button>*/}
-                    <button onClick={this.switchNamesHandler.bind(this, "Devy2")}>
-                        Switch names
-                    </button>
-                </div>
-            );
+            persons = <Persons persons={this.state.persons}
+                               nameChangedHandler={this.nameChangedHandler}
+                               deletePersonHandler={this.deletePersonHandler}
+                               switchNamesHandler={this.switchNamesHandler}/>
         }
 
         return (
             <div>
-                <div className="App">
+                <div className={classes.App}>
                     {/*<UserInput paragraphChangedEvent={this.paragraphChangedHandler}
                                value={this.state.texts[0].firstParagraph}/>
                     <UserOutput text={this.state.texts[0]}/>
@@ -145,14 +131,13 @@ class App extends Component {
                             </span>
                         )
                     }
-
-                    <p style={{marginTop: 200}}>{this.state.applicationTitle}</p>
-
+                    <Cockpit personslength={this.state.persons.length}
+                             applicationTitle={this.state.applicationTitle}
+                             togglePersons={this.togglePersons}
+                             showPersons={this.state.showPersons}/>
                     {
                         persons
                     }
-
-                    <button onClick={this.togglePersons}>Toggle persons</button>
                     {/*https://reactjs.org/docs/events.html#supported-events*/}
                 </div>
 
@@ -169,4 +154,4 @@ class App extends Component {
         React.createElement('h1', null, 'Hello, i\'m a React app'));*/
 }
 
-export default App;
+export default Radium(App);
